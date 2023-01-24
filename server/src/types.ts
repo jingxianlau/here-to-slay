@@ -60,12 +60,15 @@ export type AnyCard =
 export type LargeCard = LeaderCard | MonsterCard;
 
 export interface GameState {
-  dice: { d1: [number, number]; d2: [number, number] } | null;
+  secret: {
+    deck: AnyCard[];
+  };
+  dice: { d1: [number, number]; d2: [number, number] | null };
   players: {
-    [key: number]: Card[];
-  } | null;
+    [key: string]: Card[];
+  };
   board: {
-    [key: number]: {
+    [key: string]: {
       heroCards: [
         HeroCard | null,
         HeroCard | null,
@@ -80,11 +83,10 @@ export interface GameState {
         LargeCard | null
       ];
     };
-    main: {
-      deck: AnyCard[];
-      discardPile: AnyCard[];
-      monsterPile: AnyCard[];
-      monsters: [MonsterCard, MonsterCard, MonsterCard];
-    };
-  } | null;
+  };
+  mainDeck: {
+    discardPile: AnyCard[];
+    monsterPile: AnyCard[];
+    monsters: [MonsterCard | null, MonsterCard | null, MonsterCard | null];
+  };
 }

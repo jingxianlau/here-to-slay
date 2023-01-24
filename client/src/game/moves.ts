@@ -1,4 +1,5 @@
 import { Move } from 'boardgame.io';
 import { GameState } from '../types';
 
-export const drawCard: Move<GameState> = ({ G, ctx }, number) => {};
+// apparently you only need the move name to send the req to the server
+export const DrawCard = () => {};

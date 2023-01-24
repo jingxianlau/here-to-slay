@@ -8,7 +8,8 @@ import {
   MonsterCard,
   CardType,
   HeroClass,
-  AnyCard
+  AnyCard,
+  GameState
 } from '../types';
 
 export const leaderCards: LeaderCard[] = [
@@ -378,7 +379,15 @@ export const itemCards: ItemCard[] = [
     type: CardType.Item
   },
   {
+    name: 'Particularly Rusty Coin',
+    type: CardType.Item
+  },
+  {
     name: 'Ranger Mask',
+    type: CardType.Item
+  },
+  {
+    name: 'Really Big Ring',
     type: CardType.Item
   },
   {
@@ -402,6 +411,10 @@ export const itemCards: ItemCard[] = [
     type: CardType.Item
   },
   {
+    name: "Curse of the Snake's Eye",
+    type: CardType.Item
+  },
+  {
     name: 'Sealing Key',
     type: CardType.Item
   }
@@ -411,6 +424,61 @@ export const modifierCards: ModifierCard[] = [
   {
     name: 'modifier',
     modifier: [+1, -3],
+    type: CardType.Modifier
+  },
+  {
+    name: 'modifier',
+    modifier: [+1, -3],
+    type: CardType.Modifier
+  },
+  {
+    name: 'modifier',
+    modifier: [+1, -3],
+    type: CardType.Modifier
+  },
+  {
+    name: 'modifier',
+    modifier: [+1, -3],
+    type: CardType.Modifier
+  },
+  {
+    name: 'modifier',
+    modifier: [2, -2],
+    type: CardType.Modifier
+  },
+  {
+    name: 'modifier',
+    modifier: [2, -2],
+    type: CardType.Modifier
+  },
+  {
+    name: 'modifier',
+    modifier: [2, -2],
+    type: CardType.Modifier
+  },
+  {
+    name: 'modifier',
+    modifier: [2, -2],
+    type: CardType.Modifier
+  },
+  {
+    name: 'modifier',
+    modifier: [2, -2],
+    type: CardType.Modifier
+  },
+  {
+    name: 'modifier',
+    modifier: [2, -2],
+    type: CardType.Modifier
+  },
+  {
+    name: 'modifier',
+    modifier: [2, -2],
+    type: CardType.Modifier
+  },
+  {
+    name: 'modifier',
+    modifier: [2, -2],
     type: CardType.Modifier
   },
   {
@@ -425,7 +493,52 @@ export const modifierCards: ModifierCard[] = [
   },
   {
     name: 'modifier',
+    modifier: [3, -1],
+    type: CardType.Modifier
+  },
+  {
+    name: 'modifier',
+    modifier: [3, -1],
+    type: CardType.Modifier
+  },
+  {
+    name: 'modifier',
+    modifier: [3, -1],
+    type: CardType.Modifier
+  },
+  {
+    name: 'modifier',
     modifier: [4],
+    type: CardType.Modifier
+  },
+  {
+    name: 'modifier',
+    modifier: [4],
+    type: CardType.Modifier
+  },
+  {
+    name: 'modifier',
+    modifier: [4],
+    type: CardType.Modifier
+  },
+  {
+    name: 'modifier',
+    modifier: [4],
+    type: CardType.Modifier
+  },
+  {
+    name: 'modifier',
+    modifier: [-4],
+    type: CardType.Modifier
+  },
+  {
+    name: 'modifier',
+    modifier: [-4],
+    type: CardType.Modifier
+  },
+  {
+    name: 'modifier',
+    modifier: [-4],
     type: CardType.Modifier
   },
   {
@@ -439,12 +552,80 @@ export const challengeCard: ChallengeCard[] = [
   {
     name: 'challenge',
     type: CardType.Challenge
+  },
+  {
+    name: 'challenge',
+    type: CardType.Challenge
+  },
+  {
+    name: 'challenge',
+    type: CardType.Challenge
+  },
+  {
+    name: 'challenge',
+    type: CardType.Challenge
+  },
+  {
+    name: 'challenge',
+    type: CardType.Challenge
+  },
+  {
+    name: 'challenge',
+    type: CardType.Challenge
+  },
+  {
+    name: 'challenge',
+    type: CardType.Challenge
+  },
+  {
+    name: 'challenge',
+    type: CardType.Challenge
+  },
+  {
+    name: 'challenge',
+    type: CardType.Challenge
+  },
+  {
+    name: 'challenge',
+    type: CardType.Challenge
+  },
+  {
+    name: 'challenge',
+    type: CardType.Challenge
+  },
+  {
+    name: 'challenge',
+    type: CardType.Challenge
+  },
+  {
+    name: 'challenge',
+    type: CardType.Challenge
+  },
+  {
+    name: 'challenge',
+    type: CardType.Challenge
   }
 ];
 
 export const magicCards: MagicCard[] = [
   {
     name: 'Call to the Fallen',
+    type: CardType.Magic
+  },
+  {
+    name: 'Critical Boost',
+    type: CardType.Magic
+  },
+  {
+    name: 'Destructive Spell',
+    type: CardType.Magic
+  },
+  {
+    name: 'Enchanted Spell',
+    type: CardType.Magic
+  },
+  {
+    name: 'Entangling Trap',
     type: CardType.Magic
   },
   {
@@ -474,15 +655,19 @@ export const magicCards: MagicCard[] = [
   {
     name: 'Winds of Change',
     type: CardType.Magic
+  },
+  {
+    name: 'Winds of Change',
+    type: CardType.Magic
   }
 ];
 
-export const cards: AnyCard[] = [
+export const deck: AnyCard[] = [
   ...heroCards,
-  ...leaderCards,
-  ...monsterCards,
   ...itemCards,
   ...magicCards,
   ...modifierCards,
   ...challengeCard
 ];
+
+export const monsterPile: MonsterCard[] = [...monsterCards];
