@@ -8,8 +8,7 @@ import {
   MonsterCard,
   CardType,
   HeroClass,
-  AnyCard,
-  GameState
+  AnyCard
 } from '../types';
 
 export const leaderCards: LeaderCard[] = [

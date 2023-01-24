@@ -62,6 +62,7 @@ export type LargeCard = LeaderCard | MonsterCard;
 export interface GameState {
   secret: {
     deck: AnyCard[];
+    leaderCards: LeaderCard[];
   };
   dice: { d1: [number, number]; d2: [number, number] | null };
   players: {
@@ -69,6 +70,10 @@ export interface GameState {
   };
   board: {
     [key: string]: {
+      classes: {
+        [key: string]: number;
+        NUM_HEROES: number;
+      };
       heroCards: [
         HeroCard | null,
         HeroCard | null,
