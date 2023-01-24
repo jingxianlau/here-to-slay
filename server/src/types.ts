@@ -1,4 +1,4 @@
-enum HeroClass {
+export enum HeroClass {
   Fighter = 'FIGHTER',
   Bard = 'BARD',
   Guardian = 'GUARDIAN',
@@ -7,7 +7,7 @@ enum HeroClass {
   Wizard = 'WIZARD'
 }
 
-enum CardType {
+export enum CardType {
   Modifier = 'MODIFIER',
   Challenge = 'CHALLENGE',
   Hero = 'HERO',
@@ -16,11 +16,11 @@ enum CardType {
   Item = 'ITEM'
 }
 
-export interface Card {
-  player: number;
+interface Card {
+  player?: number;
   name: string;
   type: CardType;
-  id: number;
+  id?: number;
 }
 export interface HeroCard extends Card {
   type: CardType.Hero;
@@ -28,17 +28,15 @@ export interface HeroCard extends Card {
 }
 export interface ChallengeCard extends Card {
   type: CardType.Challenge;
-  upgraded: boolean;
-  upgradeRequirement?: HeroClass;
 }
 export interface ModifierCard extends Card {
   type: CardType.Modifier;
-  modifier: number;
-  diceId: 1 | 2;
+  modifier: [number, number] | [number];
+  diceId?: 1 | 2;
 }
 export interface ItemCard extends Card {
   type: CardType.Item;
-  heroId: number;
+  heroId?: number;
 }
 export interface MagicCard extends Card {
   type: CardType.Magic;
@@ -50,13 +48,21 @@ export interface LeaderCard extends MonsterCard {
   type: CardType.Large;
   class: HeroClass;
 }
+export type AnyCard =
+  | HeroCard
+  | ChallengeCard
+  | ModifierCard
+  | ItemCard
+  | MagicCard
+  | MonsterCard
+  | LeaderCard;
 
 export type LargeCard = LeaderCard | MonsterCard;
 
 export interface GameState {
   dice: { d1: [number, number]; d2: [number, number] } | null;
   players: {
-    [key: number]: [Card];
+    [key: number]: Card[];
   } | null;
   board: {
     [key: number]: {
@@ -75,9 +81,9 @@ export interface GameState {
       ];
     };
     main: {
-      deck: [Card];
-      discardPile: [Card];
-      monsterPile: [MonsterCard];
+      deck: AnyCard[];
+      discardPile: AnyCard[];
+      monsterPile: AnyCard[];
       monsters: [MonsterCard, MonsterCard, MonsterCard];
     };
   } | null;
