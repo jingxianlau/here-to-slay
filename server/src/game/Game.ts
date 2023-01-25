@@ -1,13 +1,13 @@
 import { GameState } from '../types';
 import { PlayerView } from 'boardgame.io/core';
 import { Game } from 'boardgame.io';
-import { deck, leaderCards, monsterPile } from './cards';
-import { DrawCard } from './moves';
+import { deck, leaderPile, monsterPile } from './cards';
+import { AddItem, DestroyHero, DrawCard, SummonHero } from './moves';
 
 const startingState: GameState = {
   secret: {
     deck: deck,
-    leaderCards: leaderCards
+    leaderPile: leaderPile
   },
   dice: {
     d1: [6, 6],
@@ -23,13 +23,13 @@ const startingState: GameState = {
 };
 
 function isVictory(board: GameState['board'], playerID: string): boolean {
-  if (board[playerID].largeCards.filter(x => x === null).length === 0) {
+  if (board[playerID].largeCards.length === 4) {
     return true;
   }
   let classes = Object.values(board[playerID].classes);
   if (
     classes.filter(x => x === 1).length === 6 && // there are 6 '1's in the array -> 1 of every class
-    board[playerID].classes['NUM_HEROES'] === 5
+    board[playerID].heroCards.length === 5
   ) {
     return true;
   }
@@ -81,7 +81,7 @@ export const HereToSlay: Game<GameState> = {
             moves: {}
           },
           play: {
-            moves: {}
+            moves: { SummonHero, AddItem, DestroyHero }
           }
         }
       }

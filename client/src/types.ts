@@ -25,6 +25,7 @@ interface Card {
 export interface HeroCard extends Card {
   type: CardType.Hero;
   class: HeroClass;
+  items?: ItemCard[];
 }
 export interface ChallengeCard extends Card {
   type: CardType.Challenge;
@@ -62,26 +63,22 @@ export type LargeCard = LeaderCard | MonsterCard;
 export interface GameState {
   secret: {
     deck: AnyCard[];
+    leaderPile: LeaderCard[];
   };
-  dice: { d1: [number, number]; d2: [number, number] | null };
+  dice: {
+    d1: [number, number];
+    d2: [number, number] | null;
+  };
   players: {
-    [key: string]: Card[];
+    [key: string]: AnyCard[];
   };
   board: {
     [key: string]: {
-      heroCards: [
-        HeroCard | null,
-        HeroCard | null,
-        HeroCard | null,
-        HeroCard | null,
-        HeroCard | null
-      ];
-      largeCards: [
-        LargeCard | null,
-        LargeCard | null,
-        LargeCard | null,
-        LargeCard | null
-      ];
+      classes: {
+        [key: string]: number;
+      };
+      heroCards: HeroCard[];
+      largeCards: LargeCard[];
     };
   };
   mainDeck: {

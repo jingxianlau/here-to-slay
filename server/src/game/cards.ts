@@ -11,6 +11,7 @@ import {
   AnyCard
 } from '../types';
 
+// ALL CARDS (BASE GAME)
 export const leaderCards: LeaderCard[] = [
   {
     name: 'The Charismatic Song',
@@ -668,5 +669,7 @@ export const deck: AnyCard[] = [
   ...modifierCards,
   ...challengeCard
 ];
+
+export const leaderPile: LeaderCard[] = [...leaderCards];
 
 export const monsterPile: MonsterCard[] = [...monsterCards];
