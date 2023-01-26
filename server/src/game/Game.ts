@@ -1,4 +1,4 @@
-import { GameState } from '../types';
+import { CardType, GameState } from '../types';
 import { PlayerView } from 'boardgame.io/core';
 import { Game } from 'boardgame.io';
 import { deck, leaderPile, monsterPile } from './cards';
@@ -10,15 +10,19 @@ const startingState: GameState = {
     leaderPile: leaderPile
   },
   dice: {
-    d1: [6, 6],
-    d2: null
+    1: null,
+    2: null
   },
   players: {},
   board: {},
   mainDeck: {
     discardPile: [],
     monsterPile: monsterPile,
-    monsters: [null, null, null]
+    monsters: [
+      { type: CardType.Large, name: '' },
+      { type: CardType.Large, name: '' },
+      { type: CardType.Large, name: '' }
+    ]
   }
 };
 

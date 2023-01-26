@@ -68,8 +68,8 @@ export interface GameState {
     leaderPile: LeaderCard[];
   };
   dice: {
-    d1: [number, number];
-    d2: [number, number] | null;
+    1: { roll: [number, number]; modifier: number } | null;
+    2: { roll: [number, number]; modifier: number } | null;
   };
   players: {
     [key: string]: AnyCard[];
@@ -86,6 +86,6 @@ export interface GameState {
   mainDeck: {
     discardPile: AnyCard[];
     monsterPile: AnyCard[];
-    monsters: [MonsterCard | null, MonsterCard | null, MonsterCard | null];
+    monsters: [MonsterCard, MonsterCard, MonsterCard];
   };
 }
