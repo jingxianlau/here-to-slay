@@ -10,38 +10,45 @@ import {
   HeroClass,
   AnyCard
 } from '../types';
+import { v4 as UUID } from 'uuid';
 
 // ALL CARDS (BASE GAME)
 export const leaderCards: LeaderCard[] = [
   {
     name: 'The Charismatic Song',
     class: HeroClass.Bard,
-    type: CardType.Large
+    type: CardType.Large,
+    id: UUID()
   },
   {
     name: 'The Cloaked Sage',
     class: HeroClass.Wizard,
-    type: CardType.Large
+    type: CardType.Large,
+    id: UUID()
   },
   {
     name: 'The Divine Arrow',
     class: HeroClass.Ranger,
-    type: CardType.Large
+    type: CardType.Large,
+    id: UUID()
   },
   {
     name: 'The Fist of Reason',
     class: HeroClass.Fighter,
-    type: CardType.Large
+    type: CardType.Large,
+    id: UUID()
   },
   {
     name: 'The Protecting Horn',
     class: HeroClass.Guardian,
-    type: CardType.Large
+    type: CardType.Large,
+    id: UUID()
   },
   {
     name: 'The Shadow Claw',
     class: HeroClass.Thief,
-    type: CardType.Large
+    type: CardType.Large,
+    id: UUID()
   }
 ];
 

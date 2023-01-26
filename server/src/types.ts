@@ -1,3 +1,5 @@
+import { RandomUUIDOptions } from 'crypto';
+
 export enum HeroClass {
   Fighter = 'FIGHTER',
   Bard = 'BARD',
@@ -20,7 +22,7 @@ interface Card {
   player?: number;
   name: string;
   type: CardType;
-  id?: number;
+  id?: string;
 }
 export interface HeroCard extends Card {
   type: CardType.Hero;

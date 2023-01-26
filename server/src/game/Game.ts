@@ -67,7 +67,7 @@ export const HereToSlay: Game<GameState> = {
       next: 'play'
     },
     play: {
-      moves: {},
+      moves: { SummonHero, AddItem, DestroyHero },
       turn: {
         minMoves: 3,
         stages: {
