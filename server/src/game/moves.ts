@@ -34,10 +34,12 @@ export const DrawCard: Move<GameState> = {
       const cards: AnyCard[] = [];
       for (let i = 0; i < number; i++) {
         const newCard = G.secret.deck.pop() as AnyCard;
-        newCard.id = UUID();
+        if (!newCard.id) {
+          newCard.id = UUID();
+        }
         cards.push(newCard);
       }
-      G.players[playerID] = G.players[playerID].concat(cards);
+      G.players[playerID].hand = G.players[playerID].hand.concat(cards);
     } else if (ctx.phase === 'draw') {
       // DRAW ALL CARDS FOR SETUP
       // decks and monsters
@@ -64,7 +66,7 @@ export const DrawCard: Move<GameState> = {
         card.id = UUID();
         cards.push(card);
       }
-      G.players[playerID] = cards;
+      G.players[playerID].hand = cards;
 
       // setup board
       const partyLeader = G.secret.leaderPile.pop() as LeaderCard;
@@ -87,14 +89,53 @@ export const DrawCard: Move<GameState> = {
   client: false
 };
 
+export const DrawFromDiscardPile: Move<GameState> = (
+  { G, playerID },
+  cardID
+): typeof INVALID_MOVE | void => {
+  if (!includesID(G.mainDeck.discardPile, cardID)) return INVALID_MOVE;
+
+  const card = removeCard(G.mainDeck.discardPile, cardID);
+  G.players[playerID].hand.push(card);
+};
+
+export const RollDice: Move<GameState> = ({ G, random }, diceID: 1 | 2) => {
+  G.dice[diceID] = { roll: [random.D6(), random.D6()], modifier: 0 };
+};
+
+export const Discard: Move<GameState> = (
+  { G, playerID },
+  cardID: string
+): typeof INVALID_MOVE | void => {
+  if (!includesID(G.players[playerID].hand, cardID)) return INVALID_MOVE;
+
+  const card = removeCard(G.players[playerID].hand, cardID);
+  G.mainDeck.discardPile.push(card);
+};
+
+export const ModifyDice: Move<GameState> = (
+  { G, playerID },
+  diceID: 1 | 2,
+  modifierID: string,
+  modifier: number
+): typeof INVALID_MOVE | void => {
+  if (!includesID(G.players[playerID].hand, modifierID)) return INVALID_MOVE;
+
+  const dice = G.dice[diceID];
+  if (dice !== null) {
+    removeCard(G.players[playerID].hand, modifierID);
+    dice.modifier += modifier;
+  } else return INVALID_MOVE;
+};
+
 export const SummonHero: Move<GameState> = (
   { G, playerID },
   heroID: string
 ): typeof INVALID_MOVE | void => {
   if (G.board[playerID].heroCards.length === 5) return INVALID_MOVE;
-  if (!includesID(G.players[playerID], heroID)) return INVALID_MOVE;
+  if (!includesID(G.players[playerID].hand, heroID)) return INVALID_MOVE;
 
-  const hero = removeCard(G.players[playerID], heroID);
+  const hero = removeCard(G.players[playerID].hand, heroID);
 
   if (hero.type !== CardType.Hero) return INVALID_MOVE;
   // add to board
@@ -109,9 +150,9 @@ export const AddItem: Move<GameState> = (
   itemID: string
 ): typeof INVALID_MOVE | void => {
   if (!includesID(G.board[playerID].heroCards, heroID)) return INVALID_MOVE;
-  if (!includesID(G.players[playerID], itemID)) return INVALID_MOVE;
+  if (!includesID(G.players[playerID].hand, itemID)) return INVALID_MOVE;
 
-  const itemCard = removeCard(G.players[playerID], itemID) as ItemCard;
+  const itemCard = removeCard(G.players[playerID].hand, itemID) as ItemCard;
 
   if (itemCard.type !== CardType.Item) return INVALID_MOVE;
 
@@ -144,35 +185,6 @@ export const DestroyHero: Move<GameState> = (
   G.mainDeck.discardPile.push(heroCard);
 };
 
-export const RollDice: Move<GameState> = ({ G, random }, diceID: 1 | 2) => {
-  G.dice[diceID] = { roll: [random.D6(), random.D6()], modifier: 0 };
-};
-
-export const ModifyDice: Move<GameState> = (
-  { G, playerID },
-  diceID: 1 | 2,
-  modifierID: string,
-  modifier: number
-): typeof INVALID_MOVE | void => {
-  if (!includesID(G.players[playerID], modifierID)) return INVALID_MOVE;
-
-  const dice = G.dice[diceID];
-  if (dice !== null) {
-    removeCard(G.players[playerID], modifierID);
-    dice.modifier += modifier;
-  } else return INVALID_MOVE;
-};
-
-export const Discard: Move<GameState> = (
-  { G, playerID },
-  cardID: string
-): typeof INVALID_MOVE | void => {
-  if (!includesID(G.players[playerID], cardID)) return INVALID_MOVE;
-
-  const card = removeCard(G.players[playerID], cardID);
-  G.mainDeck.discardPile.push(card);
-};
-
 export const StealCard: Move<GameState> = {
   move: (
     { G, ctx, playerID },
@@ -192,6 +204,45 @@ export const StealCard: Move<GameState> = {
     G.board[playerID].classes[hero.class]++;
   },
   client: false
+};
+
+export const TakeFromHand: Move<GameState> = {
+  move: ({ G, playerID }, enemyID, cardID): typeof INVALID_MOVE | void => {
+    if (!includesID(G.players[enemyID].hand, cardID)) return INVALID_MOVE;
+
+    const card = removeCard(G.players[enemyID].hand, cardID);
+    G.players[playerID].hand.push(card);
+  },
+  client: false
+};
+
+export const SwapHeroes: Move<GameState> = (
+  { G, playerID },
+  playerCardID,
+  enemyID,
+  enemyCardID
+): typeof INVALID_MOVE | void => {
+  if (!includesID(G.board[playerID].heroCards, playerCardID))
+    return INVALID_MOVE;
+  if (!includesID(G.board[enemyID].heroCards, enemyCardID)) return INVALID_MOVE;
+
+  const playerCard = removeCard(
+    G.board[playerID].heroCards,
+    playerCardID
+  ) as HeroCard;
+  const enemyCard = removeCard(
+    G.board[enemyID].heroCards,
+    enemyCardID
+  ) as HeroCard;
+
+  G.board[playerID].heroCards.push(enemyCard);
+  G.board[enemyID].heroCards.push(playerCard);
+
+  // update classes obj
+  G.board[playerID].classes[playerCard.class]--;
+  G.board[playerID].classes[enemyCard.class]++;
+  G.board[enemyID].classes[enemyCard.class]--;
+  G.board[enemyID].classes[playerCard.class]++;
 };
 
 export const SlayMonster: Move<GameState> = (

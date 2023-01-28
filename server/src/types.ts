@@ -1,5 +1,3 @@
-import { RandomUUIDOptions } from 'crypto';
-
 export enum HeroClass {
   Fighter = 'FIGHTER',
   Bard = 'BARD',
@@ -72,7 +70,7 @@ export interface GameState {
     2: { roll: [number, number]; modifier: number } | null;
   };
   players: {
-    [key: string]: AnyCard[];
+    [key: string]: { hand: AnyCard[] };
   };
   board: {
     [key: string]: {
