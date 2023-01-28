@@ -1,6 +1,6 @@
 import { Game } from 'boardgame.io';
 import { GameState } from '../types';
-import { DrawCard, AddItem, DestroyHero, SummonHero } from './moves';
+import { DrawCard, moves, PlayStage } from './moves';
 
 export default {
   phases: {
@@ -14,7 +14,7 @@ export default {
       next: 'play'
     },
     play: {
-      moves: { SummonHero, AddItem, DestroyHero },
+      moves: moves,
       turn: {
         minMoves: 3,
         stages: {
@@ -28,7 +28,7 @@ export default {
             moves: {}
           },
           play: {
-            moves: { SummonHero, AddItem, DestroyHero }
+            moves: PlayStage
           }
         }
       }

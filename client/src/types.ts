@@ -20,7 +20,7 @@ interface Card {
   player?: number;
   name: string;
   type: CardType;
-  id?: number;
+  id?: string;
 }
 export interface HeroCard extends Card {
   type: CardType.Hero;
@@ -66,11 +66,11 @@ export interface GameState {
     leaderPile: LeaderCard[];
   };
   dice: {
-    d1: [number, number];
-    d2: [number, number] | null;
+    1: { roll: [number, number]; modifier: number } | null;
+    2: { roll: [number, number]; modifier: number } | null;
   };
   players: {
-    [key: string]: AnyCard[];
+    [key: string]: { hand: AnyCard[]; knownSecrets: AnyCard[] };
   };
   board: {
     [key: string]: {
@@ -84,6 +84,6 @@ export interface GameState {
   mainDeck: {
     discardPile: AnyCard[];
     monsterPile: AnyCard[];
-    monsters: [MonsterCard | null, MonsterCard | null, MonsterCard | null];
+    monsters: [MonsterCard, MonsterCard, MonsterCard];
   };
 }

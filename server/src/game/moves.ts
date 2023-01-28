@@ -26,7 +26,6 @@ function removeCard(arr: AnyCard[], cardID: string): AnyCard {
   )[0];
 }
 
-// TODO: ADD ID PROPERTY TO ALL DRAWN CARDS
 export const DrawCard: Move<GameState> = {
   move: ({ G, ctx, random, playerID }, number) => {
     if (ctx.phase === 'play') {
@@ -67,6 +66,7 @@ export const DrawCard: Move<GameState> = {
         cards.push(card);
       }
       G.players[playerID].hand = cards;
+      G.players[playerID].knownSecrets = [];
 
       // setup board
       const partyLeader = G.secret.leaderPile.pop() as LeaderCard;
@@ -91,7 +91,7 @@ export const DrawCard: Move<GameState> = {
 
 export const DrawFromDiscardPile: Move<GameState> = (
   { G, playerID },
-  cardID
+  cardID: string
 ): typeof INVALID_MOVE | void => {
   if (!includesID(G.mainDeck.discardPile, cardID)) return INVALID_MOVE;
 
@@ -217,11 +217,12 @@ export const TakeFromHand: Move<GameState> = {
 };
 
 export const SwapHeroes: Move<GameState> = (
-  { G, playerID },
+  { G, ctx, playerID },
   playerCardID,
   enemyID,
   enemyCardID
 ): typeof INVALID_MOVE | void => {
+  if (Number(enemyID) >= ctx.numPlayers) return INVALID_MOVE;
   if (!includesID(G.board[playerID].heroCards, playerCardID))
     return INVALID_MOVE;
   if (!includesID(G.board[enemyID].heroCards, enemyCardID)) return INVALID_MOVE;
@@ -260,4 +261,34 @@ export const SlayMonster: Move<GameState> = (
 
   const newMonster = G.mainDeck.monsterPile.pop() as MonsterCard;
   G.mainDeck.monsters[monsterIndex] = newMonster;
+};
+
+export const RevealCard: Move<GameState> = {
+  move: ({ G, ctx, playerID }, cardID: string): typeof INVALID_MOVE | void => {
+    if (!includesID(G.players[playerID].hand, cardID)) return INVALID_MOVE;
+
+    const card = G.players[playerID].hand.find(
+      value => value.id === cardID
+    ) as AnyCard;
+
+    for (let i = 0; i < ctx.numPlayers; i++) {
+      G.players[String(i)].knownSecrets.push(card);
+    }
+  },
+  client: false
+};
+
+export const PeekHand: Move<GameState> = {
+  move: ({ G, ctx, playerID }, enemyID: string): typeof INVALID_MOVE | void => {
+    if (Number(enemyID) >= ctx.numPlayers) return INVALID_MOVE;
+
+    const hand = G.players[enemyID].hand;
+
+    G.players[playerID].knownSecrets.concat(hand);
+  },
+  client: false
+};
+
+export const RemoveSecrets: Move<GameState> = ({ G, playerID }) => {
+  G.players[playerID].knownSecrets = [];
 };
