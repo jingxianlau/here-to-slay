@@ -12,6 +12,7 @@ import {
   MonsterCard
 } from '../types';
 
+// HELPER FUNCTIONS
 function includesID(arr: AnyCard[], id: string) {
   console.log(
     id,
@@ -27,8 +28,9 @@ function removeCard(arr: AnyCard[], cardID: string): AnyCard {
   )[0];
 }
 
+// MOVES
 export const DrawCard: Move<GameState> = {
-  move: ({ G, ctx, random, playerID }, number) => {
+  move: ({ G, ctx, random, playerID, events }, number) => {
     if (ctx.phase === 'play') {
       // STANDARD DRAW
       const cards: AnyCard[] = [];
@@ -85,6 +87,11 @@ export const DrawCard: Move<GameState> = {
         largeCards: [partyLeader]
       };
       G.board[playerID].classes[partyLeader.class]++;
+
+      if (playerID === String(ctx.numPlayers - 1)) {
+        events.setPhase('play');
+        events.setStage('play');
+      }
     }
   },
   client: false
@@ -100,8 +107,16 @@ export const DrawFromDiscardPile: Move<GameState> = (
   G.players[playerID].hand.push(card);
 };
 
-export const RollDice: Move<GameState> = ({ G, random }, diceID: 1 | 2) => {
+export const RollDice: Move<GameState> = (
+  { G, random, events },
+  diceID: 1 | 2,
+  changeStage: boolean = true
+) => {
   G.dice[diceID] = { roll: [random.D6(), random.D6()], modifier: 0 };
+
+  if (changeStage) {
+    events.setStage('modify');
+  }
 };
 
 export const ClearDice: Move<GameState> = ({ G }) => {
@@ -300,7 +315,7 @@ export const RemoveSecrets: Move<GameState> = ({ G, playerID }) => {
 };
 
 export const PrepareCard: Move<GameState> = (
-  { G, playerID },
+  { G, playerID, events },
   cardID
 ): typeof INVALID_MOVE | void => {
   if (!includesID(G.players[playerID].hand, cardID)) return INVALID_MOVE;
@@ -318,6 +333,8 @@ export const PrepareCard: Move<GameState> = (
     return;
   }
   G.mainDeck.preparedCard.card = card;
+
+  events.setStage('challenge');
 };
 
 export const UnprepareCard: Move<GameState> = ({ G }) => {
@@ -325,7 +342,7 @@ export const UnprepareCard: Move<GameState> = ({ G }) => {
 };
 
 export const ChallengeCard: Move<GameState> = (
-  { G },
+  { G, events },
   cardID: string
 ): typeof INVALID_MOVE | void => {
   if (!G.mainDeck.preparedCard) return INVALID_MOVE;
@@ -336,6 +353,8 @@ export const ChallengeCard: Move<GameState> = (
   const roll2 = G.dice[2].roll[0] + G.dice[2].roll[1] + G.dice[2].modifier; // defender
   if (roll1 >= roll2) G.mainDeck.preparedCard.successful = false;
   if (roll1 < roll2) G.mainDeck.preparedCard.successful = true;
+
+  events.setStage('play');
 };
 
 export const PlayStage = {
