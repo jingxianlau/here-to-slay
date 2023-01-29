@@ -1,6 +1,13 @@
 import { Game } from 'boardgame.io';
 import { GameState } from '../types';
-import { DrawCard, moves, PlayStage } from './moves';
+import {
+  ChallengeCard,
+  DrawCard,
+  ModifyDice,
+  moves,
+  PlayStage,
+  RollDice
+} from './moves';
 
 export default {
   phases: {
@@ -22,10 +29,10 @@ export default {
             moves: { DrawCard }
           },
           challenge: {
-            moves: {}
+            moves: { ChallengeCard, RollDice }
           },
           modify: {
-            moves: {}
+            moves: { ModifyDice }
           },
           play: {
             moves: PlayStage

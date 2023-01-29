@@ -5,6 +5,7 @@ export const AddItem = () => {};
 export const DestroyHero = () => {};
 export const DrawFromDiscardPile = () => {};
 export const RollDice = () => {};
+export const ClearDice = () => {};
 export const ModifyDice = () => {};
 export const Discard = () => {};
 export const StealCard = () => {};
@@ -14,6 +15,9 @@ export const SlayMonster = () => {};
 export const RevealCard = () => {};
 export const PeekHand = () => {};
 export const RemoveSecrets = () => {};
+export const ChallengeCard = () => {};
+export const PrepareCard = () => {};
+export const UnprepareCard = () => {};
 
 export const PlayStage = {
   SummonHero,
@@ -21,6 +25,7 @@ export const PlayStage = {
   DestroyHero,
   DrawFromDiscardPile,
   RollDice,
+  ClearDice,
   Discard,
   StealCard,
   TakeFromHand,
@@ -28,11 +33,14 @@ export const PlayStage = {
   SlayMonster,
   RevealCard,
   PeekHand,
-  RemoveSecrets
+  RemoveSecrets,
+  PrepareCard,
+  UnprepareCard
 };
 
 export const moves = {
   ...PlayStage,
   DrawCard,
+  ChallengeCard,
   ModifyDice
 };

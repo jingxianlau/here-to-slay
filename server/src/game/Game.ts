@@ -2,7 +2,17 @@ import { CardType, GameState } from '../types';
 import { PlayerView } from 'boardgame.io/core';
 import { Game } from 'boardgame.io';
 import { deck, leaderPile, monsterPile } from './cards';
-import { AddItem, DestroyHero, DrawCard, SummonHero } from './moves';
+import {
+  AddItem,
+  ChallengeCard,
+  DestroyHero,
+  DrawCard,
+  ModifyDice,
+  moves,
+  PlayStage,
+  RollDice,
+  SummonHero
+} from './moves';
 
 const startingState: GameState = {
   secret: {
@@ -71,7 +81,7 @@ export const HereToSlay: Game<GameState> = {
       next: 'play'
     },
     play: {
-      moves: { SummonHero, AddItem, DestroyHero },
+      moves: moves,
       turn: {
         minMoves: 3,
         stages: {
@@ -79,13 +89,13 @@ export const HereToSlay: Game<GameState> = {
             moves: { DrawCard }
           },
           challenge: {
-            moves: {}
+            moves: { ChallengeCard, RollDice }
           },
           modify: {
-            moves: {}
+            moves: { ModifyDice }
           },
           play: {
-            moves: { SummonHero, AddItem, DestroyHero }
+            moves: PlayStage
           }
         }
       }

@@ -8,6 +8,7 @@ import {
   HeroCard,
   ItemCard,
   LeaderCard,
+  MagicCard,
   MonsterCard
 } from '../types';
 
@@ -101,6 +102,11 @@ export const DrawFromDiscardPile: Move<GameState> = (
 
 export const RollDice: Move<GameState> = ({ G, random }, diceID: 1 | 2) => {
   G.dice[diceID] = { roll: [random.D6(), random.D6()], modifier: 0 };
+};
+
+export const ClearDice: Move<GameState> = ({ G }) => {
+  G.dice[1] = null;
+  G.dice[2] = null;
 };
 
 export const Discard: Move<GameState> = (
@@ -291,4 +297,69 @@ export const PeekHand: Move<GameState> = {
 
 export const RemoveSecrets: Move<GameState> = ({ G, playerID }) => {
   G.players[playerID].knownSecrets = [];
+};
+
+export const PrepareCard: Move<GameState> = (
+  { G, playerID },
+  cardID
+): typeof INVALID_MOVE | void => {
+  if (!includesID(G.players[playerID].hand, cardID)) return INVALID_MOVE;
+
+  const card = removeCard(G.players[playerID].hand, cardID) as
+    | HeroCard
+    | ItemCard
+    | MagicCard;
+
+  if (!G.mainDeck.preparedCard) {
+    G.mainDeck.preparedCard = {
+      card: card,
+      successful: null
+    };
+    return;
+  }
+  G.mainDeck.preparedCard.card = card;
+};
+
+export const UnprepareCard: Move<GameState> = ({ G }) => {
+  G.mainDeck.preparedCard = undefined;
+};
+
+export const ChallengeCard: Move<GameState> = (
+  { G },
+  cardID: string
+): typeof INVALID_MOVE | void => {
+  if (!G.mainDeck.preparedCard) return INVALID_MOVE;
+  if (G.mainDeck.preparedCard.card.id !== cardID) return INVALID_MOVE;
+  if (!G.dice[1] || !G.dice[2]) return INVALID_MOVE;
+
+  const roll1 = G.dice[1].roll[0] + G.dice[1].roll[1] + G.dice[1].modifier; // attacker
+  const roll2 = G.dice[2].roll[0] + G.dice[2].roll[1] + G.dice[2].modifier; // defender
+  if (roll1 >= roll2) G.mainDeck.preparedCard.successful = false;
+  if (roll1 < roll2) G.mainDeck.preparedCard.successful = true;
+};
+
+export const PlayStage = {
+  SummonHero,
+  AddItem,
+  DestroyHero,
+  DrawFromDiscardPile,
+  RollDice,
+  ClearDice,
+  Discard,
+  StealCard,
+  TakeFromHand,
+  SwapHeroes,
+  SlayMonster,
+  RevealCard,
+  PeekHand,
+  RemoveSecrets,
+  PrepareCard,
+  UnprepareCard
+};
+
+export const moves = {
+  ...PlayStage,
+  DrawCard,
+  ChallengeCard,
+  ModifyDice
 };

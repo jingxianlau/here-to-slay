@@ -85,5 +85,9 @@ export interface GameState {
     discardPile: AnyCard[];
     monsterPile: AnyCard[];
     monsters: [MonsterCard, MonsterCard, MonsterCard];
+    preparedCard?: {
+      card: HeroCard | MagicCard | ItemCard;
+      successful: null | boolean;
+    };
   };
 }
