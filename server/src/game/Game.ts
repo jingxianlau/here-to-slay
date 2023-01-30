@@ -3,15 +3,12 @@ import { PlayerView } from 'boardgame.io/core';
 import { Game } from 'boardgame.io';
 import { deck, leaderPile, monsterPile } from './cards';
 import {
-  AddItem,
   ChallengeCard,
-  DestroyHero,
   DrawCard,
   ModifyDice,
   moves,
   PlayStage,
-  RollDice,
-  SummonHero
+  RollDice
 } from './moves';
 
 const startingState: GameState = {
