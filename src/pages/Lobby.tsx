@@ -24,7 +24,9 @@ const Lobby: React.FC = () => {
       return;
     } else {
       // create socket connection
-      let socket = io('http://localhost:4000');
+      let socket = io(
+        'https://https://here-to-slay-server.jing-xianxian1.repl.co/'
+      );
       socket.on('connect', () => {});
 
       setSocket(socket);
