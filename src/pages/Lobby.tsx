@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { GameState } from '../types';
 import { getCredentials } from '../helpers/getJSON';
 import useClientContext from '../hooks/useClientContext';
+import { match } from 'assert';
 
 const Lobby: React.FC = () => {
   const navigate = useNavigate();
@@ -95,7 +96,8 @@ const Lobby: React.FC = () => {
   }
 
   return (
-    credentials && (
+    credentials &&
+    matchState && (
       <>
         <h5 className='lobby-id'>Lobby ID: {credentials.roomId}</h5>
         <div className='lobby'>
