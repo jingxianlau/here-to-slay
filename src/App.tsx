@@ -34,7 +34,7 @@ function App() {
 
   async function loadRooms() {
     const response = await fetch(
-      'http://here-to-slay-server.jing-xianxian1.repl.co/get-rooms'
+      'https://here-to-slay-server.jing-xianxian1.repl.co/get-rooms'
     );
     const json = await response.json();
     setRooms(json);
@@ -42,7 +42,7 @@ function App() {
 
   async function joinRoom(id?: string) {
     const res = await fetch(
-      'http://here-to-slay-server.jing-xianxian1.repl.co/join-room',
+      'https://here-to-slay-server.jing-xianxian1.repl.co/join-room',
       {
         method: 'POST',
         body: JSON.stringify({ roomId: id ? id : roomId, username: username }),
@@ -75,7 +75,7 @@ function App() {
       alert('Invalid Room ID');
     } else {
       const res = await fetch(
-        'http://here-to-slay-server.jing-xianxian1.repl.co/create-room',
+        'https://here-to-slay-server.jing-xianxian1.repl.co/create-room',
         {
           method: 'POST',
           body: JSON.stringify({
@@ -104,7 +104,11 @@ function App() {
 
   return (
     <div className='App' style={{ margin: '25px' }}>
-      <img src='/HTS_title.png' alt='Here to Slay' width='300px' />
+      <img
+        src='https://jingxianlau.github.io/here-to-slay/HTS_title.png'
+        alt='Here to Slay'
+        width='300px'
+      />
       <br />
       <form>
         <label>Username</label>
