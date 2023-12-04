@@ -189,7 +189,7 @@ const ConfirmCard: React.FC<ConfirmCardProps> = ({ socket }) => {
             ) : customText === 'Draw' ? (
               <div className='img-container'>
                 <img
-                  src='%PUBLIC_URL%/assets/back/back-creme.png'
+                  src='./static/assets/back/back-creme.png'
                   alt='Deck'
                   className='small-xl'
                   draggable='false'

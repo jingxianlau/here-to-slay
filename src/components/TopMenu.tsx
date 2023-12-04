@@ -33,7 +33,7 @@ const TopMenu: React.FC = () => {
               : 'turn-circle inactive'
           }
         >
-          <img src='%PUBLIC_URL%/assets/circle-star.svg' />
+          <img src='./static/assets/circle-star.svg' />
         </div>
         <div
           className={
@@ -42,7 +42,7 @@ const TopMenu: React.FC = () => {
               : 'turn-circle inactive'
           }
         >
-          <img src='%PUBLIC_URL%/assets/circle-star.svg' />
+          <img src='./static/assets/circle-star.svg' />
         </div>
         <div
           className={
@@ -51,7 +51,7 @@ const TopMenu: React.FC = () => {
               : 'turn-circle inactive'
           }
         >
-          <img src='%PUBLIC_URL%/assets/circle-star.svg' />
+          <img src='./static/assets/circle-star.svg' />
         </div>
       </div>
     </div>

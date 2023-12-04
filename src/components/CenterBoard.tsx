@@ -119,7 +119,7 @@ const CenterBoard: React.FC<CenterBoardProps> = ({
         <div className='small-cards'>
           <div className='small deck'>
             <img
-              src='%PUBLIC_URL%/assets/back/back-creme.png'
+              src='./static/assets/back/back-creme.png'
               alt='flipped card'
               className={`small-card ${
                 (state.val.turn.phase === 'draw' &&
