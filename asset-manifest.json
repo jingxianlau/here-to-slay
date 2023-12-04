@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "https://jingxianlau.github.io/here-to-slay/static/css/main.a5858a92.css",
-    "main.js": "https://jingxianlau.github.io/here-to-slay/static/js/main.9542a35b.js",
+    "main.js": "https://jingxianlau.github.io/here-to-slay/static/js/main.c64513d2.js",
     "static/media/HTS_Dragon.png": "https://jingxianlau.github.io/here-to-slay/static/media/HTS_Dragon.aa39b3320c76b88844d2.png",
     "static/media/ranger.png": "https://jingxianlau.github.io/here-to-slay/static/media/ranger.dae7deac6d5f51905163.png",
     "static/media/thief.png": "https://jingxianlau.github.io/here-to-slay/static/media/thief.1d842182b738f4cb2ae4.png",
@@ -16,10 +16,10 @@
     "static/media/cross.png": "https://jingxianlau.github.io/here-to-slay/static/media/cross.2835c81cf9c25c6d7662.png",
     "index.html": "https://jingxianlau.github.io/here-to-slay/index.html",
     "main.a5858a92.css.map": "https://jingxianlau.github.io/here-to-slay/static/css/main.a5858a92.css.map",
-    "main.9542a35b.js.map": "https://jingxianlau.github.io/here-to-slay/static/js/main.9542a35b.js.map"
+    "main.c64513d2.js.map": "https://jingxianlau.github.io/here-to-slay/static/js/main.c64513d2.js.map"
   },
   "entrypoints": [
     "static/css/main.a5858a92.css",
-    "static/js/main.9542a35b.js"
+    "static/js/main.c64513d2.js"
   ]
 }
