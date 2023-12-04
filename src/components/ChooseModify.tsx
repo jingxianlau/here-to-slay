@@ -72,8 +72,8 @@ const ChooseModify: React.FC<ChooseModifyProps> = ({
               className='logo'
               src={
                 dice === 0
-                  ? '%PUBLIC_URL%/static/assets/sword.png'
-                  : '%PUBLIC_URL%/static/assets/shield.png'
+                  ? '%PUBLIC_URL%/assets/sword.png'
+                  : '%PUBLIC_URL%/assets/shield.png'
               }
               alt={''}
             />

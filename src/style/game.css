@@ -530,42 +530,42 @@ img.small-card.hero {
   transition: 0.25s ease-in-out, background-size 0.35s ease-in-out;
 }
 .small.item-attached.cursed::after {
-  background: url('%PUBLIC_URL%/static/assets/cursed.png');
+  background: url('./assets/cursed.png');
   background-size: 3.33vh;
   background-position: center;
 }
 .small.item-attached.blessed::after {
-  background: url('%PUBLIC_URL%/static/assets/blessed.png');
+  background: url('./assets/blessed.png');
   background-size: 3.33vh;
   background-position: center;
 }
 .small.item-attached.bard::after {
-  background: url('%PUBLIC_URL%/static/assets/bard.png');
+  background: url('./assets/bard.png');
   background-size: 3.33vh;
   background-position: center;
 }
 .small.item-attached.wizard::after {
-  background: url('%PUBLIC_URL%/static/assets/wizard.png');
+  background: url('./assets/wizard.png');
   background-size: 3.33vh;
   background-position: center;
 }
 .small.item-attached.fighter::after {
-  background: url('%PUBLIC_URL%/static/assets/fighter.png');
+  background: url('./assets/fighter.png');
   background-size: 3.33vh;
   background-position: center;
 }
 .small.item-attached.ranger::after {
-  background: url('%PUBLIC_URL%/static/assets/ranger.png');
+  background: url('./assets/ranger.png');
   background-size: 3.33vh;
   background-position: center;
 }
 .small.item-attached.guardian::after {
-  background: url('%PUBLIC_URL%/static/assets/guardian.png');
+  background: url('./assets/guardian.png');
   background-size: 3.33vh;
   background-position: center;
 }
 .small.item-attached.thief::after {
-  background: url('%PUBLIC_URL%/static/assets/thief.png');
+  background: url('./assets/thief.png');
   background-size: 3.33vh;
   background-position: center;
 }
@@ -580,42 +580,42 @@ img.small-card.hero {
   box-shadow: #111 0 0 1.4vh 0.5vh;
 }
 .own-board .small.item-attached.cursed::after {
-  background: url('%PUBLIC_URL%/static/assets/cursed.png');
+  background: url('./assets/cursed.png');
   background-size: 4.5vh;
   background-position: center;
 }
 .own-board .small.item-attached.blessed::after {
-  background: url('%PUBLIC_URL%/static/assets/blessed.png');
+  background: url('./assets/blessed.png');
   background-size: 4.5vh;
   background-position: center;
 }
 .own-board .small.item-attached.bard::after {
-  background: url('%PUBLIC_URL%/static/assets/bard.png');
+  background: url('./assets/bard.png');
   background-size: 4.5vh;
   background-position: center;
 }
 .own-board .small.item-attached.wizard::after {
-  background: url('%PUBLIC_URL%/static/assets/wizard.png');
+  background: url('./assets/wizard.png');
   background-size: 4.5vh;
   background-position: center;
 }
 .own-board .small.item-attached.fighter::after {
-  background: url('%PUBLIC_URL%/static/assets/fighter.png');
+  background: url('./assets/fighter.png');
   background-size: 4.5vh;
   background-position: center;
 }
 .own-board .small.item-attached.ranger::after {
-  background: url('%PUBLIC_URL%/static/assets/ranger.png');
+  background: url('./assets/ranger.png');
   background-size: 4.5vh;
   background-position: center;
 }
 .own-board .small.item-attached.guardian::after {
-  background: url('%PUBLIC_URL%/static/assets/guardian.png');
+  background: url('./assets/guardian.png');
   background-size: 4.5vh;
   background-position: center;
 }
 .own-board .small.item-attached.thief::after {
-  background: url('%PUBLIC_URL%/static/assets/thief.png');
+  background: url('./assets/thief.png');
   background-size: 4.5vh;
   background-position: center;
 }
@@ -658,7 +658,7 @@ img.large-lg {
   left: 0;
   border-radius: 2vh;
   transition: 0.5s ease-in-out;
-  background-image: url('%PUBLIC_URL%/static/assets/mats/central.png');
+  background-image: url('./assets/mats/central.png');
   background-size: cover;
   opacity: 0.3;
 }
@@ -735,22 +735,22 @@ img.large-lg {
   opacity: 0.3;
 }
 .mat.bard .background {
-  background-image: url('%PUBLIC_URL%/static/assets/mats/bard.png');
+  background-image: url('./assets/mats/bard.png');
 }
 .mat.fighter .background {
-  background-image: url('%PUBLIC_URL%/static/assets/mats/fighter.png');
+  background-image: url('./assets/mats/fighter.png');
 }
 .mat.guardian .background {
-  background-image: url('%PUBLIC_URL%/static/assets/mats/guardian.png');
+  background-image: url('./assets/mats/guardian.png');
 }
 .mat.ranger .background {
-  background-image: url('%PUBLIC_URL%/static/assets/mats/ranger.png');
+  background-image: url('./assets/mats/ranger.png');
 }
 .mat.thief .background {
-  background-image: url('%PUBLIC_URL%/static/assets/mats/thief.png');
+  background-image: url('./assets/mats/thief.png');
 }
 .mat.wizard .background {
-  background-image: url('%PUBLIC_URL%/static/assets/mats/wizard.png');
+  background-image: url('./assets/mats/wizard.png');
 }
 
 img.small-card {
@@ -783,7 +783,7 @@ img.deny:hover {
 }
 .img-container.cross-lg::after {
   content: '';
-  background: url('%PUBLIC_URL%/static/assets/cross.png');
+  background: url('./assets/cross.png');
   background-color: #f9515150;
   background-size: 37.8vh;
   background-position: center;
@@ -934,7 +934,7 @@ img.deny:hover {
 div.tick {
   margin-top: -0.3vh;
   margin-left: -0.7vh;
-  background: url('%PUBLIC_URL%/static/assets/tick.png');
+  background: url('./assets/tick.png');
   background-size: cover;
   display: inline-block;
   height: 5vh;
@@ -943,7 +943,7 @@ div.tick {
 div.cross {
   margin-top: -0.3vh;
   margin-left: -0.7vh;
-  background: url('%PUBLIC_URL%/static/assets/cross.png');
+  background: url('./assets/cross.png');
   background-size: cover;
   display: inline-block;
   height: 5vh;
@@ -1052,7 +1052,7 @@ div.cross {
 }
 .cancel-button .button::after {
   content: '';
-  background: url('%PUBLIC_URL%/static/assets/cross.png');
+  background: url('./assets/cross.png');
   background-size: 4vh;
   background-position: center;
   position: absolute;
@@ -1467,7 +1467,7 @@ div.cross {
 /* HELPER TEXT & TIMER */
 .helper-text-container {
   position: absolute;
-  background: url('%PUBLIC_URL%/static/assets/HTS_Dragon.png');
+  background: url('./assets/HTS_Dragon.png');
   background-size: cover;
   transition: opacity ease-in-out 0.2s;
 }
