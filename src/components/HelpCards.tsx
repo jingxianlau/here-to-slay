@@ -6,7 +6,7 @@ const HelpCards: React.FC<{ showHelp: boolean }> = ({ showHelp }) => {
       <div className={`help-cards${showHelp ? ' show' : ' hide'}`}>
         <div className='img-container'>
           <img
-            src='./static/assets/help/help-front.jpg'
+            src='%PUBLIC_URL%/static/assets/help/help-front.jpg'
             alt='help card 1'
             className='small-enlarged'
             draggable='false'
@@ -14,7 +14,7 @@ const HelpCards: React.FC<{ showHelp: boolean }> = ({ showHelp }) => {
         </div>
         <div className='img-container'>
           <img
-            src='./static/assets/help/help-back.jpg'
+            src='%PUBLIC_URL%/static/assets/help/help-back.jpg'
             alt='help card 2'
             className='small-enlarged'
             draggable='false'

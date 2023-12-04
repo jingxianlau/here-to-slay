@@ -203,7 +203,7 @@ const ChallengePopup: React.FC<{
               }}
             >
               <img
-                src='./static/assets/challenge/challenge.png'
+                src='%PUBLIC_URL%/static/assets/challenge/challenge.png'
                 alt='challenge'
                 className='small-lg center-img'
                 draggable='false'
@@ -321,7 +321,10 @@ const ChallengePopup: React.FC<{
                   {state.turn.phase === 'modify' && state.dice.defend && (
                     <div className='summary'>
                       <div>
-                        <img src={'./static/assets/sword.png'} alt={''} />
+                        <img
+                          src={'%PUBLIC_URL%/static/assets/sword.png'}
+                          alt={''}
+                        />
                         <h1
                           style={{
                             color:
@@ -345,7 +348,10 @@ const ChallengePopup: React.FC<{
                         >
                           {state.dice.defend?.total}
                         </h1>
-                        <img src={'./static/assets/shield.png'} alt={''} />
+                        <img
+                          src={'%PUBLIC_URL%/static/assets/shield.png'}
+                          alt={''}
+                        />
                       </div>
                     </div>
                   )}
@@ -385,7 +391,7 @@ const ChallengePopup: React.FC<{
                       </span>
                     ) : (
                       <img
-                        src='./static/assets/sword.png'
+                        src='%PUBLIC_URL%/static/assets/sword.png'
                         alt={''}
                         className={`logo`}
                       />
@@ -445,7 +451,7 @@ const ChallengePopup: React.FC<{
                       </span>
                     ) : (
                       <img
-                        src='./static/assets/shield.png'
+                        src='%PUBLIC_URL%/static/assets/shield.png'
                         alt={''}
                         className={`logo`}
                       />

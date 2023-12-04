@@ -104,7 +104,7 @@ function App() {
 
   return (
     <div className='App' style={{ margin: '25px' }}>
-      <img src='/HTS_title.png' alt='Here to Slay' width='300px' />
+      <img src='%PUBLIC_URL%/HTS_title.png' alt='Here to Slay' width='300px' />
       <br />
       <form>
         <label>Username</label>

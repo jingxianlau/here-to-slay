@@ -6,11 +6,11 @@ export const shortenName = (card: AnyCard) =>
 export const getImage = (card: AnyCard) => {
   if (card) {
     if (card.type === CardType.hero) {
-      return `./static/assets/${card.type}/${card.class}/${shortenName(
+      return `%PUBLIC_URL%/assets/${card.type}/${card.class}/${shortenName(
         card
       )}.png`;
     } else {
-      return `./static/assets/${card.type}/${shortenName(card)}.png`;
+      return `%PUBLIC_URL%/assets/${card.type}/${shortenName(card)}.png`;
     }
   }
 };
