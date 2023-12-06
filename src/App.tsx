@@ -33,24 +33,19 @@ function App() {
   }
 
   async function loadRooms() {
-    const response = await fetch(
-      'https://here-to-slay-server.jing-xianxian1.repl.co/get-rooms'
-    );
+    const response = await fetch('http://localhost:4000/get-rooms');
     const json = await response.json();
     setRooms(json);
   }
 
   async function joinRoom(id?: string) {
-    const res = await fetch(
-      'https://here-to-slay-server.jing-xianxian1.repl.co/join-room',
-      {
-        method: 'POST',
-        body: JSON.stringify({ roomId: id ? id : roomId, username: username }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
+    const res = await fetch('http://localhost:4000/join-room', {
+      method: 'POST',
+      body: JSON.stringify({ roomId: id ? id : roomId, username: username }),
+      headers: {
+        'Content-Type': 'application/json'
       }
-    );
+    });
     const json = await res.json();
 
     if (json.successful) {
@@ -74,20 +69,17 @@ function App() {
     ) {
       alert('Invalid Room ID');
     } else {
-      const res = await fetch(
-        'https://here-to-slay-server.jing-xianxian1.repl.co/create-room',
-        {
-          method: 'POST',
-          body: JSON.stringify({
-            roomId: roomId,
-            isPrivate: isPrivate,
-            username: username
-          }),
-          headers: {
-            'Content-Type': 'application/json'
-          }
+      const res = await fetch('http://localhost:4000/create-room', {
+        method: 'POST',
+        body: JSON.stringify({
+          roomId: roomId,
+          isPrivate: isPrivate,
+          username: username
+        }),
+        headers: {
+          'Content-Type': 'application/json'
         }
-      );
+      });
       const json = await res.json();
 
       if (json.successful) {
@@ -101,6 +93,12 @@ function App() {
       }
     }
   }
+
+  // DEV
+  useEffect(() => {
+    joinRoom('999999');
+  }, []);
+  // DEV
 
   return (
     <div className='App' style={{ margin: '25px' }}>
